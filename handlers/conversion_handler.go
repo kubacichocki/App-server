@@ -1,3 +1,5 @@
+// handlers/conversion_handler.go
+
 package handlers
 
 import (
@@ -7,6 +9,7 @@ import (
 	"net/http"
 )
 
+// HandleConversion handles the conversion request.
 func HandleConversion(w http.ResponseWriter, r *http.Request) {
 	var req models.ConversionRequest
 	err := json.NewDecoder(r.Body).Decode(&req)
@@ -15,7 +18,7 @@ func HandleConversion(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	pounds := utils.KgToPounds(req.Kilograms)
+	pounds := utils.KgToPounds(req.Kilograms) // Use KgToPounds function from utils package
 	res := models.ConversionResponse{Pounds: pounds}
 
 	w.Header().Set("Content-Type", "application/json")
