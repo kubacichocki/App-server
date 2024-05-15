@@ -1,9 +1,8 @@
-// handlers/conversion_handler.go
-
 package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"myrestapi/models"
 	"myrestapi/utils"
 	"net/http"
@@ -18,8 +17,18 @@ func HandleConversion(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	pounds := utils.KgToPounds(req.Kilograms) // Use KgToPounds function from utils package
-	res := models.ConversionResponse{Pounds: pounds}
+	var result string
+	switch req.Type {
+	case "kgToPounds":
+		result = fmt.Sprintf("%.2f", utils.KgToPounds(req.Value)) + "lbs"
+	case "poundsToKg":
+		result = fmt.Sprintf("%.2f", utils.PoundsToKg(req.Value)) + "kg"
+	default:
+		http.Error(w, "Invalid conversion type", http.StatusBadRequest)
+		return
+	}
+
+	res := models.ConversionResponse{Value: result}
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(res)

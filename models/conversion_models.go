@@ -2,10 +2,11 @@ package models
 
 // ConversionRequest represents the request body for the conversion endpoint.
 type ConversionRequest struct {
-	Kilograms float64 `json:"kilograms"`
+	Type  string  `json:"type"`  // Type of conversion (e.g., "kgToPounds", "poundsToKg")
+	Value float64 `json:"value"` // Value to be converted
 }
 
 // ConversionResponse represents the response body for the conversion endpoint.
 type ConversionResponse struct {
-	Pounds float64 `json:"pounds"`
+	Value string `json:"value"` // Converted value
 }
