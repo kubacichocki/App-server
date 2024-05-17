@@ -5,10 +5,15 @@ import (
 	"myrestapi/handlers"
 	"net/http"
 
+	db "myrestapi/database"
+
 	"github.com/rs/cors"
 )
 
 func main() {
+
+	db.InitiateDb()
+
 	// Create a new router
 	router := http.NewServeMux()
 
