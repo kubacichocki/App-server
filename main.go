@@ -18,7 +18,7 @@ func main() {
 	router := http.NewServeMux()
 
 	// Register the handler for the /convert endpoint
-	router.HandleFunc("/convert", handlers.HandleConversion)
+	router.HandleFunc("POST /convert", handlers.HandleConversion)
 
 	// Use CORS middleware
 	c := cors.AllowAll()

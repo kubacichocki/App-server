@@ -19,10 +19,17 @@ func HandleConversion(w http.ResponseWriter, r *http.Request) {
 
 	var result string
 	switch req.Type {
-	case "kgToPounds":
+	case "KgToPounds":
 		result = fmt.Sprintf("%.2f", utils.KgToPounds(req.Value)) + "lbs"
-	case "poundsToKg":
+	case "PoundsToKg":
 		result = fmt.Sprintf("%.2f", utils.PoundsToKg(req.Value)) + "kg"
+	case "KmToMiles":
+		result = fmt.Sprintf("%.2f", utils.KmToMiles(req.Value)) + "miles"
+	case "MilesToKm":
+		result = fmt.Sprintf("%.2f", utils.MilesToKm(req.Value)) + "km"
+	case "CmToFeetInches":
+		feet, inches := utils.CmToFeetInches(req.Value)
+		result = fmt.Sprintf("%d feet and %.2f inches", feet, inches)
 	default:
 		http.Error(w, "Invalid conversion type", http.StatusBadRequest)
 		return
